@@ -27,7 +27,7 @@ Connections                   ttl     opn     rt1     rt5     p50     p90
 ```
 127.0.0.1 0d19b31c.ngrok.io
 ```
-5. Open %YOUR WORKSPACE%\MailgunWebhooks\.vs\config\applicationhost.config
+5. Open %YOUR WORKSPACE%\MailgunWebhooks\\.vs\config\applicationhost.config
 6. In applicationhost.config look for your Site xml node
 7. Add the following line <binding protocol="http" bindingInformation="*:65008:" /> into the <bindings> like in the following example
 ```xml
