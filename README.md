@@ -1,35 +1,19 @@
-# MailgunWebhooks
+# MailgunWebhooks #
 Mailgun Webhooks WebAPI Endpoints
 
-Status: Currently in Progress
+> Status: Currently in Progress
 
-Testing Webhooks locally from IIS Express
-1. Download ngrok https://ngrok.com/
-2. If 65008 is your port used to run the web api, then run the following command in your terminal 
-```
-.\ngrok.exe http 65008
-```
-3. The output should be similar with the following:
-```
-ngrok by @inconshreveable
+## Testing Webhooks locally from IIS Express ##
+To test Webhooks with real data, you need to expose your local website on internet. Here is a nice clean way to do it.  
 
-Session Status                online
-Version                       2.2.8
-Region                        United States (us)
-Web Interface                 http://127.0.0.1:4040
-Forwarding                    http://0d19b31c.ngrok.io -> localhost:65008
-Forwarding                    https://0d19b31c.ngrok.io -> localhost:65008
-
-Connections                   ttl     opn     rt1     rt5     p50     p90
-                              0       0       0.00    0.00    0.00    0.00
+* Open MailgunWebhooks WebAPI solution in Visual Studio.
+* Open %YOUR WORKSPACE%\MailgunWebhooks\\.vs\config\applicationhost.config
+* In applicationhost.config look for your Site xml node
+* If 65008 is your port, add the following line 
+```xml
+<binding protocol="http" bindingInformation="*:65008:" /><bindings> 
 ```
-4. Open your host file and add
-```
-127.0.0.1 0d19b31c.ngrok.io
-```
-5. Open %YOUR WORKSPACE%\MailgunWebhooks\\.vs\config\applicationhost.config
-6. In applicationhost.config look for your Site xml node
-7. Add the following line <binding protocol="http" bindingInformation="*:65008:" /> into the <bindings> like in the following example
+* Example
 ```xml
 <site name="MailgunWebhooks" id="2">
     <application path="/" applicationPool="Clr4IntegratedAppPool">
@@ -41,5 +25,20 @@ Connections                   ttl     opn     rt1     rt5     p50     p90
     </bindings>
 </site>
 ```
-8. (Optional) Set Web Api Visual Studio project start url to http://0d19b31c.ngrok.io
-9. Remember that you're in Windows so restart Visual Studio.
+* Open %YOUR WORKSPACE%\MailgunWebhooks\\packages.config and replace port 65008 with your port
+* Run your solution from Visual Studio (F5)
+* Open your terminal and navigate to the solution folder to install the npm packages and run start
+```
+npm install
+```
+```
+npm start
+```
+* The output of "npm start" should be similar with the following:
+```
+> mailgun-webhooks@1.0.0 start C:\Workspace\csharp\MailgunWebhooks
+> lt --port 65008 --open
+
+your url is: https://elemuzzmps.localtunnel.me
+```
+* The presented url should be opened into your browser

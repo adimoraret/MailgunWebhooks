@@ -5,3 +5,4 @@
 *.suo
 packages
 *.DotSettings.*
+node_modules
