@@ -27,7 +27,7 @@ namespace MailgunWebhooks.Helper
 
         private IDictionary<string, string> ConvertToDictionary(IEnumerable<KeyValuePair<string, string>> formData)
         {
-            return formData.ToDictionary(item => item.Key, item => item.Value);
+            return formData?.ToDictionary(item => item.Key, item => item.Value);
         }
 
         private IDictionary<string,string> ConvertToDictionary(NameValueCollection formData)
