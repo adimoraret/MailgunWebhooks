@@ -1,6 +1,6 @@
 ﻿namespace MailgunWebhooks.Models
 {
-    public class DeliverRequest
+    public class DeliverRequest : WebhookRequest
     {
     }
 }

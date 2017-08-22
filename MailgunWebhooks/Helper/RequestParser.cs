@@ -6,19 +6,27 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using MailgunWebhooks.Models;
 using MailgunWebhooks.Validators;
 
 namespace MailgunWebhooks.Helper
 {
     internal class RequestParser : IRequestParser
     {
-        public HttpStatusCode ProcessFormDataRequest<T>(IEnumerable<KeyValuePair<string, string>> formData, EventType eventType)
+        private readonly IWebhookRequestValidator _webhookRequestValidator;
+
+        public RequestParser(IWebhookRequestValidator webhookRequestValidator)
+        {
+            _webhookRequestValidator = webhookRequestValidator;
+        }
+
+        public HttpStatusCode ProcessFormDataRequest<T>(IEnumerable<KeyValuePair<string, string>> formData, EventType eventType) where T : WebhookRequest
         {
             var data = ConvertToDictionary(formData);
             return ProcessRequest<T>(data);
         }
 
-        public HttpStatusCode ProcessMultipartRequest<T>(HttpRequestMessage request, EventType eventType)
+        public HttpStatusCode ProcessMultipartRequest<T>(HttpRequestMessage request, EventType eventType) where T : WebhookRequest
         {
             var formData = ExtractFormData(request);
             var data =  ConvertToDictionary(formData.Result);
@@ -44,11 +52,10 @@ namespace MailgunWebhooks.Helper
             return content.FormData;
         }
 
-        private  HttpStatusCode ProcessRequest<T>(IDictionary<string, string> requestBody)
+        private  HttpStatusCode ProcessRequest<T>(IDictionary<string, string> requestBody) where T : WebhookRequest
         {
             var request = AutoMapper.Mapper.Map<T>(requestBody);
-            IWebhookRequestValidator validator = new WebhookRequestValidator();
-            if (validator.HasValidSignature(request)) {
+            if (_webhookRequestValidator.HasValidSignature(request)) {
                 return HttpStatusCode.NotAcceptable;
             }
             return HttpStatusCode.OK;

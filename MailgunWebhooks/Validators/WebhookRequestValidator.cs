@@ -1,10 +1,24 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
+using MailgunWebhooks.Models;
+
 namespace MailgunWebhooks.Validators
 {
-    class WebhookRequestValidator : IWebhookRequestValidator
+    public class WebhookRequestValidator : IWebhookRequestValidator
     {
-        public bool HasValidSignature(object request)
+        private readonly string _apiKey;
+
+        public WebhookRequestValidator(string apiKey)
         {
-            throw new System.NotImplementedException();
+            _apiKey = apiKey;
+        }
+        public bool HasValidSignature(WebhookRequest request)
+        {
+            var hmac = new HMACSHA256(Encoding.ASCII.GetBytes(_apiKey));
+            var signature = hmac.ComputeHash(Encoding.ASCII.GetBytes(request.Timestamp + request.Token));
+            var generatedSignature = BitConverter.ToString(signature).Replace("-", "");
+            return generatedSignature.Equals(request.Signature, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

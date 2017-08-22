@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using MailgunWebhooks.Controllers;
 using MailgunWebhooks.Helper;
+using MailgunWebhooks.Validators;
 using NUnit.Framework;
 
 namespace MailgunWebhooks.Tests
@@ -13,7 +14,8 @@ namespace MailgunWebhooks.Tests
         [SetUp]
         public void SetUp()
         {
-            _sut = new MailGunWebhooksController(new RequestParser());
+            var requestValidator = new WebhookRequestValidator("sample");
+            _sut = new MailGunWebhooksController(new RequestParser(requestValidator));
         }
 
         [Test]
