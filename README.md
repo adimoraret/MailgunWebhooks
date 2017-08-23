@@ -1,8 +1,9 @@
 # MailgunWebhooks #
 Mailgun Webhooks WebAPI Endpoints
 
-> Status: Currently in Progress
+[![Build Status](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)
 
+> Status: Currently in Progress
 ## Table of Contents
 
 1.[Testing Webhooks locally from IIS Express](https://github.com/adimoraret/MailgunWebhooks#testing-webhooks-locally-from-iis-express)
