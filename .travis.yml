@@ -1,4 +1,10 @@
 language: csharp
 solution: "./MailgunWebhooks.sln"
+
 install:
-- travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./MailgunWebhooks.sln
+  - travis_retry nuget restore -source "https://www.nuget.org/api/v2" ./MailgunWebhooks.sln
+  - travis_retry nuget install NUnit.ConsoleRunner -Version 3.7.0 -OutputDirectory consolerunner
+
+script:
+  - xbuild /p:Configuration=Release MailgunWebhooks.sln
+  - mono ./consolerunner/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./MailgunWebhooks.Tests/bin/Release/MailgunWebhooks.Tests.dll
