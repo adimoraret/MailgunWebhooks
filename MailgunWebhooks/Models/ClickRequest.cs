@@ -1,6 +1,6 @@
 ﻿namespace MailgunWebhooks.Models
 {
-    public class ClickRequest
+    public class ClickRequest : WebhookRequest
     {
         public string Ip { get; set; }
         public string Country { get; set; }

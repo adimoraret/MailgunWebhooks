@@ -10,6 +10,6 @@
         public string Timestamp { get; set; }
         public string Token { get; set; }
         public string Signature { get; set; }
-        public string Body { get; set; }
+        public string BodyPlain { get; set; }
     }
 }

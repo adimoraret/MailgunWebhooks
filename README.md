@@ -10,7 +10,7 @@ Mailgun Webhooks WebAPI Endpoints
 
 
 ## Testing Webhooks locally from IIS Express ##
-To test Webhooks with real data, you need to expose your local website on internet. Here is a nice clean way to do it.  
+To test Webhooks with online data, you need to expose your local website on internet. Here is a nice clean way to do it.  
 
 * Open MailgunWebhooks WebAPI solution in Visual Studio.
 * Open %YOUR WORKSPACE%\MailgunWebhooks\\.vs\config\applicationhost.config

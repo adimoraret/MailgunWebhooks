@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -46,7 +47,7 @@ namespace MailgunWebhooks.Helper
 
         private async Task<NameValueCollection> ExtractFormData(HttpRequestMessage request)
         {
-            var fullPath = HttpContext.Current.Server.MapPath("~/App_Data");
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data");
             var multipartProvider = new MultipartFormDataStreamProvider(fullPath);
             var content = await request.Content.ReadAsMultipartAsync(multipartProvider);
             return content.FormData;
@@ -55,7 +56,7 @@ namespace MailgunWebhooks.Helper
         private  HttpStatusCode ProcessRequest<T>(IDictionary<string, string> requestBody) where T : WebhookRequest
         {
             var request = AutoMapper.Mapper.Map<T>(requestBody);
-            if (_webhookRequestValidator.HasValidSignature(request)) {
+            if (!_webhookRequestValidator.HasValidSignature(request)) {
                 return HttpStatusCode.NotAcceptable;
             }
             return HttpStatusCode.OK;
