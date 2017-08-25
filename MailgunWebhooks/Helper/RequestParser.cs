@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
 using MailgunWebhooks.Models;
 using MailgunWebhooks.Validators;
 
@@ -14,20 +13,20 @@ namespace MailgunWebhooks.Helper
 {
     internal class RequestParser : IRequestParser
     {
-        private readonly IWebhookRequestValidator _webhookRequestValidator;
+        private readonly IWebhookSignatureValidator _webhookSignatureValidator;
 
-        public RequestParser(IWebhookRequestValidator webhookRequestValidator)
+        public RequestParser(IWebhookSignatureValidator webhookSignatureValidator)
         {
-            _webhookRequestValidator = webhookRequestValidator;
+            _webhookSignatureValidator = webhookSignatureValidator;
         }
 
-        public HttpStatusCode ProcessFormDataRequest<T>(IEnumerable<KeyValuePair<string, string>> formData, EventType eventType) where T : WebhookRequest
+        public HttpStatusCode ProcessFormDataRequest<T>(IEnumerable<KeyValuePair<string, string>> formData) where T : WebhookRequest
         {
             var data = ConvertToDictionary(formData);
             return ProcessRequest<T>(data);
         }
 
-        public HttpStatusCode ProcessMultipartRequest<T>(HttpRequestMessage request, EventType eventType) where T : WebhookRequest
+        public HttpStatusCode ProcessMultipartRequest<T>(HttpRequestMessage request) where T : WebhookRequest
         {
             var formData = ExtractFormData(request);
             var data =  ConvertToDictionary(formData.Result);
@@ -56,7 +55,7 @@ namespace MailgunWebhooks.Helper
         private  HttpStatusCode ProcessRequest<T>(IDictionary<string, string> requestBody) where T : WebhookRequest
         {
             var request = AutoMapper.Mapper.Map<T>(requestBody);
-            if (!_webhookRequestValidator.HasValidSignature(request)) {
+            if (!_webhookSignatureValidator.IsValid(request)) {
                 return HttpStatusCode.NotAcceptable;
             }
             return HttpStatusCode.OK;

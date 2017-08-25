@@ -15,7 +15,7 @@ namespace MailgunWebhooks
 
             var container = new Container();
             container.Register<IRequestParser, RequestParser>();
-            container.Register<IWebhookRequestValidator>(() => new WebhookRequestValidator(apiKey));
+            container.Register<IWebhookSignatureValidator>(() => new WebhookSignatureValidator(apiKey));
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
             container.Verify();

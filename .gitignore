@@ -6,3 +6,4 @@
 packages
 *.DotSettings.*
 node_modules
+*.user

@@ -5,15 +5,15 @@ using MailgunWebhooks.Models;
 
 namespace MailgunWebhooks.Validators
 {
-    public class WebhookRequestValidator : IWebhookRequestValidator
+    public class WebhookSignatureValidator : IWebhookSignatureValidator
     {
         private readonly string _apiKey;
 
-        public WebhookRequestValidator(string apiKey)
+        public WebhookSignatureValidator(string apiKey)
         {
             _apiKey = apiKey;
         }
-        public bool HasValidSignature(WebhookRequest request)
+        public bool IsValid(WebhookRequest request)
         {
             var hmac = new HMACSHA256(Encoding.ASCII.GetBytes(_apiKey));
             var signature = hmac.ComputeHash(Encoding.ASCII.GetBytes(request.Timestamp + request.Token));

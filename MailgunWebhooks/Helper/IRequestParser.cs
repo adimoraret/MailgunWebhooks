@@ -7,8 +7,8 @@ namespace MailgunWebhooks.Helper
 {
     public interface IRequestParser
     {
-        HttpStatusCode ProcessFormDataRequest<T>(IEnumerable<KeyValuePair<string, string>> formData, EventType eventType) where T : WebhookRequest;
+        HttpStatusCode ProcessFormDataRequest<T>(IEnumerable<KeyValuePair<string, string>> formData) where T : WebhookRequest;
 
-        HttpStatusCode ProcessMultipartRequest<T>(HttpRequestMessage request, EventType eventType) where T : WebhookRequest;
+        HttpStatusCode ProcessMultipartRequest<T>(HttpRequestMessage request) where T : WebhookRequest;
     }
 }

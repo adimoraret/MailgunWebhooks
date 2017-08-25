@@ -99,7 +99,7 @@
     <Compile Include="Models\DeliverRequest.cs" />
     <Compile Include="Models\DropRequest.cs" />
     <Compile Include="EventType.cs" />
-    <Compile Include="Validators\IWebhookRequestValidator.cs" />
+    <Compile Include="Validators\IWebhookSignatureValidator.cs" />
     <Compile Include="Controllers\MailGunWebhooksController.cs" />
     <Compile Include="Models\OpenRequest.cs" />
     <Compile Include="Models\SpamRequest.cs" />
@@ -108,7 +108,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\WebhookRequestValidator.cs" />
+    <Compile Include="Validators\WebhookSignatureValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

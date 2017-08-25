@@ -19,49 +19,49 @@ namespace MailgunWebhooks.Controllers
         [Route("deliver")]
         public IHttpActionResult PostDeliver(FormDataCollection formData)
         {
-            var result = _requestParser.ProcessFormDataRequest<DeliverRequest>(formData, EventType.Deliver);
+            var result = _requestParser.ProcessFormDataRequest<DeliverRequest>(formData);
             return new StatusCodeResult(result, this);
         }
 
         [Route("unsubscribe")]
         public IHttpActionResult PostUnsubscribe(FormDataCollection formData)
         {
-            var result = _requestParser.ProcessFormDataRequest<DeliverRequest>(formData, EventType.Unsubscribe);
+            var result = _requestParser.ProcessFormDataRequest<UnsubscribeRequest>(formData);
             return new StatusCodeResult(result, this);
         }
 
         [Route("click")]
         public IHttpActionResult PostClick(FormDataCollection formData)
         {
-            var result = _requestParser.ProcessFormDataRequest<DeliverRequest>(formData, EventType.Click);
+            var result = _requestParser.ProcessFormDataRequest<ClickRequest>(formData);
             return new StatusCodeResult(result, this);
         }
 
         [Route("open")]
         public IHttpActionResult PostOpen(FormDataCollection formData)
         {
-            var result = _requestParser.ProcessFormDataRequest<DeliverRequest>(formData, EventType.Open);
+            var result = _requestParser.ProcessFormDataRequest<OpenRequest>(formData);
             return new StatusCodeResult(result, this);
         }
 
         [Route("drop")]
         public IHttpActionResult PostDrop()
         {
-            var result = _requestParser.ProcessMultipartRequest<DropRequest>(Request, EventType.Drop);
+            var result = _requestParser.ProcessMultipartRequest<DropRequest>(Request);
             return new StatusCodeResult(result, this);
         }
 
         [Route("bounce")]
         public IHttpActionResult PostBounce()
         {
-            var result = _requestParser.ProcessMultipartRequest<DropRequest>(Request, EventType.Bounce);
+            var result = _requestParser.ProcessMultipartRequest<BounceRequest>(Request);
             return new StatusCodeResult(result, this);
         }
 
         [Route("spam")]
         public IHttpActionResult PostSpam()
         {
-            var result = _requestParser.ProcessMultipartRequest<DropRequest>(Request, EventType.Spam);
+            var result = _requestParser.ProcessMultipartRequest<SpamRequest>(Request);
             return new StatusCodeResult(result, this);
         }
     }

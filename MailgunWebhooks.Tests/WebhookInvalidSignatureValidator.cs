@@ -3,9 +3,9 @@ using MailgunWebhooks.Validators;
 
 namespace MailgunWebhooks.Tests
 {
-    internal class WebhookInvalidRequestValidator : IWebhookRequestValidator
+    internal class WebhookInvalidSignatureValidator : IWebhookSignatureValidator
     {
-        public bool HasValidSignature(WebhookRequest request)
+        public bool IsValid(WebhookRequest request)
         {
             return false;
         }
