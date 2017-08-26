@@ -1,7 +1,9 @@
-﻿using System.Web.Http;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Http;
 
 namespace MailgunWebhooks
 {
+    [ExcludeFromCodeCoverage]
     public class WebApiApplication : System.Web.HttpApplication
     {
         protected void Application_Start()

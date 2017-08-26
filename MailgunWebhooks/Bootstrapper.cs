@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Http;
 using MailgunWebhooks.Helper;
 using MailgunWebhooks.Validators;
 using SimpleInjector;
@@ -6,7 +7,7 @@ using SimpleInjector.Integration.WebApi;
 
 namespace MailgunWebhooks
 {
-
+    [ExcludeFromCodeCoverage]
     public static class Bootstrapper
     {
         public static void Register()

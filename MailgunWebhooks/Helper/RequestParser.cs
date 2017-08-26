@@ -46,7 +46,7 @@ namespace MailgunWebhooks.Helper
 
         private async Task<NameValueCollection> ExtractFormData(HttpRequestMessage request)
         {
-            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data");
+            var fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data1");
             var multipartProvider = new MultipartFormDataStreamProvider(fullPath);
             var content = await request.Content.ReadAsMultipartAsync(multipartProvider);
             return content.FormData;

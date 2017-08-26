@@ -1,4 +1,5 @@
-﻿namespace MailgunWebhooks.Models
+﻿
+namespace MailgunWebhooks.Models
 {
     public class DropRequest : WebhookRequest
     {
