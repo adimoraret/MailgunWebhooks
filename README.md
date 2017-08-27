@@ -3,14 +3,7 @@ Mailgun Webhooks WebAPI Endpoints
 
 [![Build Status](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)
 
-> Status: Currently in Progress
-## Table of Contents
-
-1.[Testing Webhooks locally from IIS Express](https://github.com/adimoraret/MailgunWebhooks#testing-webhooks-locally-from-iis-express)
-
-
-## Testing Webhooks locally from IIS Express ##
-To test Webhooks with online data, you need to expose your local website on internet. Here is a nice clean way to do it.  
+To test Webhooks with online data, you need to expose your local website on internet. Here is a nice clean way to do it with Visual Studio and IIS Express.  
 
 * Open MailgunWebhooks WebAPI solution in Visual Studio.
 * Open %YOUR WORKSPACE%\MailgunWebhooks\\.vs\config\applicationhost.config
@@ -48,3 +41,18 @@ npm start
 your url is: https://elemuzzmps.localtunnel.me
 ```
 * The presented url should be opened into your browser
+
+In web.config, change the value of Mailgun key with your Mailgun key
+```xml
+<add key="MailgunKey" value="#########" />
+``` 
+
+Configure the webhooks on the mailgun website similar to:
+* https://elemuzzmps.localtunnel.me/api/mailgun/event/deliver
+* https://elemuzzmps.localtunnel.me/api/mailgun/event/drop
+* https://elemuzzmps.localtunnel.me/api/mailgun/event/bounce
+* https://elemuzzmps.localtunnel.me/api/mailgun/event/spam
+* https://elemuzzmps.localtunnel.me/api/mailgun/event/unsubscribe
+* https://elemuzzmps.localtunnel.me/api/mailgun/event/click
+* https://elemuzzmps.localtunnel.me/api/mailgun/event/open
+
