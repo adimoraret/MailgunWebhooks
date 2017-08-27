@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading;
 using System.Web.Http;
-using AutoMapper;
 using MailgunWebhooks.Controllers;
 using MailgunWebhooks.Helper;
+using MailgunWebhooks.Mapper;
 using MailgunWebhooks.Validators;
 using NUnit.Framework;
 
@@ -20,7 +20,7 @@ namespace MailgunWebhooks.Tests.Controllers
         [OneTimeSetUp]
         public void OnTimeSetUp()
         {
-            Mapper.Initialize(cfg => { cfg.AddProfile<AutoMapperProfile>(); });
+            AutoMapper.Mapper.Initialize(cfg => { cfg.AddProfile<MapperProfile>(); });
         }
 
         [SetUp]
@@ -34,7 +34,7 @@ namespace MailgunWebhooks.Tests.Controllers
         [Test]
         public void PostDeliver_Should_Be_Successfull_For_Valid_Requests()
         {
-            var request = Mother.CreateValidDeliverRequest();
+            var request = Mother.ValidDeliverRequest;
             SetupWebApiRequest(new FormUrlEncodedContent(request));
 
             var actual = _sut.PostDeliver(new FormDataCollection(request));
@@ -46,7 +46,7 @@ namespace MailgunWebhooks.Tests.Controllers
         [Test]
         public void PostUnsubscribe_Should_Be_Successfull_For_Valid_Requests()
         {
-            var request = Mother.CreateValidUnsubscribeRequest();
+            var request = Mother.ValidUnsubscribeRequest;
             SetupWebApiRequest(new FormUrlEncodedContent(request));
 
             var actual = _sut.PostUnsubscribe(new FormDataCollection(request));

@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MailgunIdentitfication.cs" />
+    <Compile Include="Mapper\MapperProfileTests.cs" />
     <Compile Include="Mother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\WebhookControllerTests.cs" />

@@ -92,7 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AutoMapperProfile.cs" />
+    <Compile Include="Mapper\MapperProfile.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Helper\IRequestParser.cs" />
     <Compile Include="Helper\RequestParser.cs" />

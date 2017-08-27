@@ -2,11 +2,11 @@
 using AutoMapper;
 using MailgunWebhooks.Models;
 
-namespace MailgunWebhooks
+namespace MailgunWebhooks.Mapper
 {
-    public class AutoMapperProfile : Profile
+    public class MapperProfile : Profile
     {
-        public AutoMapperProfile()
+        public MapperProfile()
         {
             MapMailgunWebhooks();
         }
