@@ -1,7 +1,7 @@
 # MailgunWebhooks #
 Mailgun Webhooks WebAPI Endpoints
 
-[![Build Status](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)
+[![Build Status](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)[![Coverage Status](https://coveralls.io/repos/github/adimoraret/MailgunWebhooks/badge.svg?branch=master)](https://coveralls.io/github/adimoraret/MailgunWebhooks?branch=master)
 
 To test Webhooks with online data, you need to expose your local website on internet. Here is a nice clean way to do it with Visual Studio and IIS Express.  
 
