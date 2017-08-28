@@ -3,6 +3,19 @@ Mailgun Webhooks WebAPI Endpoints
 
 [![Build Status](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)](https://travis-ci.org/adimoraret/MailgunWebhooks.svg?branch=master)[![Coverage Status](https://coveralls.io/repos/github/adimoraret/MailgunWebhooks/badge.svg?branch=master)](https://coveralls.io/github/adimoraret/MailgunWebhooks?branch=master)
 
+## Validate Mailgun Webhooks Signature in C# ##
+```csharp
+public bool IsValid(WebhookRequest request)
+{
+    var hmac = new HMACSHA256(Encoding.ASCII.GetBytes(_apiKey));
+    var signature = hmac.ComputeHash(Encoding.ASCII.GetBytes(request.Timestamp + request.Token));
+    var generatedSignature = BitConverter.ToString(signature).Replace("-", "");
+    return generatedSignature.Equals(request.Signature, StringComparison.OrdinalIgnoreCase);
+}
+```
+
+## Test Web API Webhooks locally directly from Visual Studio and IIS Express ##
+
 To test Webhooks with online data, you need to expose your local website on internet. Here is a nice clean way to do it with Visual Studio and IIS Express.  
 
 * Open MailgunWebhooks WebAPI solution in Visual Studio.
